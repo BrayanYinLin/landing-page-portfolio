@@ -1,0 +1,47 @@
+---
+import Github from './Github.astro'
+import ReadMore from './ReadMore.astro'
+import TechPill from './TechPill.astro'
+
+interface data {
+  name: string
+  icon: null | (() => any)
+}
+
+interface Props {
+  title: string
+  description: string
+  repo: string
+  data: any[]
+  linkProject: string
+  deployedProject: string
+}
+
+const { title, description, data, repo, linkProject, deployedProject } = Astro.props
+
+---
+
+<article class="flex flex-col-reverse md:flex-row justify-between mb-16">
+  <div class="md:w-[55%] mt-4 md:mt-0 pr-4 flex flex-col">
+    <h3 class="font-bold text-[26px]">{title}</h3>
+    <p class="text-[14px] font-medium">{description}</p>
+    <div class="w-5/6 flex flex-wrap gap-2">
+      {data.map(tech => (
+        <TechPill name={tech.name}>
+          {tech.icon && <tech.icon />}
+        </TechPill>
+      ))}
+    </div>
+
+    <div class="">
+      <Github link={repo} />
+      <!-- <ReadMore /> -->
+    </div>
+  </div>
+
+  <div class="md:w-[45%] flex items-center mt-4 drop-shadow-[0_4px_6px_rgba(233,168,242,0.5)]">
+    <a href={deployedProject} class="rounded-2xl w-full overflow-hidden">
+      <img src={linkProject} alt="app image" class="w-full h-auto rounded-2xl object-cover overflow-hidden hover:scale-105 transition duration-250 ease-in-out hover:cursor-pointer">
+    </a>
+  </div>
+</article>

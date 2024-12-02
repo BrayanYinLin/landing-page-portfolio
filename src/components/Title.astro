@@ -1,0 +1,23 @@
+---
+import GithubLink from "./GithubLink.astro";
+---
+
+
+
+<style>
+  #subtitle {
+    transform-origin: top center;
+  }
+
+  @keyframes slide-down {
+    0% {
+      transform: translateX(-25ch);
+    }
+    100% {
+      transform: translateX(0ch); /* Regresa al punto inicial */
+    }
+  }
+  .animate-slide-up {
+    animation: slide-down 1s ease-in-out;
+  }
+</style>
